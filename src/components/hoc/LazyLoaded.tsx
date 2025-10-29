@@ -2,20 +2,25 @@ import React, { Suspense } from 'react';
 import FullLoader from '../ui/FullLoader';
 
 export const _LazyWithSuspensePage = <T extends React.ComponentType<any>>(
-  importFn: () => Promise<{ default: T }>,
-  Loader?: React.ComponentType,
+  importFn: () => Promise<{ default: T; Loader?: React.ComponentType<any> }>,
 ) => {
-  const LazyComp = React.lazy(importFn);
+  const LazyComponentWithLoader = React.lazy(async () => {
+    const module = await importFn();
+    const Comp = module.default;
+    const Loader = module.Loader;
 
-  function WrappedLazyComponent(props: React.ComponentProps<T>) {
-    return (
-      <Suspense fallback={Loader ? <Loader /> : <FullLoader />}>
-        <LazyComp {...props} />
-      </Suspense>
-    );
-  }
+    return {
+      default: function LoadedComponent(props: React.ComponentProps<T>) {
+        return (
+          <Suspense fallback={Loader ? <Loader /> : <FullLoader />}>
+            <Comp {...props} />
+          </Suspense>
+        );
+      },
+    };
+  });
 
-  return WrappedLazyComponent;
+  return LazyComponentWithLoader;
 };
 
 export const _LazyPage = <T extends React.ComponentType<any>>(

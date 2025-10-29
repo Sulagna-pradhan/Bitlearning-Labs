@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
   );
 };
 
-export const HomeLoader = () => {
+export const Loader = () => {
   return (
     <div className="flex h-screen items-center justify-center bg-gray-900 text-white">
       <div className="animate-spin rounded-full h-10 w-10 border-4 border-t-transparent border-blue-500" />
