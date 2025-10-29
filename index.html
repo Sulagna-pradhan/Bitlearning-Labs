@@ -111,6 +111,11 @@
       This site requires JavaScript to function properly. Please enable
       JavaScript in your browser.
     </noscript>
+    <!-- Initial hydration for Theme -->
+    <script>
+      (()=>{(function(){try{let e=localStorage.getItem("theme");e?(document.documentElement.classList.remove("dark","light"),document.documentElement.classList.add(JSON.parse(e))):(document.documentElement.classList.remove("dark","light"),document.documentElement.classList.add("light"))}catch(e){document.documentElement.classList.remove("dark","light"),document.documentElement.classList.add("light"),console.error("Theme pre-load error:",e)}})();})();
+    </script>
+
     <div id="root"></div>
 
     <!-- Main App Script -->

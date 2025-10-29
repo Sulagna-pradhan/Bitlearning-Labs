@@ -1,19 +1,17 @@
-import React, { type ReactNode } from 'react';
-import Header from '../components/common/Header';
-import Footer from '../components/common/Footer';
+import React from 'react';
+import { Outlet } from 'react-router';
+import { Header, Footer } from '../components/common';
 
-interface MainLayoutProps {
-  children: ReactNode;
-}
-
-const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+const BaseLayout: React.FC = () => {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main>
+        <Outlet />
+      </main>
       <Footer />
     </>
   );
 };
 
-export default MainLayout;
+export default BaseLayout;
