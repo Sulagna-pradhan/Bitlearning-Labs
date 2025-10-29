@@ -5,12 +5,12 @@ import {
   useLocalStorage,
   useTheme,
 } from '../lib/hooks';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useTodo } from '../services/api/todo';
 
-const Homepage: React.FC = () => {
-  const [name, setName] = useState<string>('');
-  const debouncedName = useDebounce(name);
+const HomePage: React.FC = () => {
   const [storeName, setNameToStore] = useLocalStorage('userName', '');
+  const [name, setName] = useState<string>(storeName);
+  const debouncedName = useDebounce(name);
   const isMobile = useIsMobile();
   const { theme, toggleTheme } = useTheme();
 
@@ -18,31 +18,11 @@ const Homepage: React.FC = () => {
     setNameToStore(debouncedName);
   }, [debouncedName]);
 
-  const fetchTodoById = async (id: string) => {
-    try {
-      const res = await fetch(
-        'https://jsonplaceholder.typicode.com/todos/' + id,
-      );
-      const data = await res.json();
-      // simulate network delay by 2s
-      return new Promise((resolve) => setTimeout(() => resolve(data), 2000));
-    } catch (error) {
-      throw new Error(`API Error: ${error}`);
-    }
-  };
-
-  const { error, isFetching } = useSuspenseQuery({
-    queryKey: ['testing'],
-    queryFn: () => fetchTodoById('1'),
-  });
-
-  if (!isFetching && error) {
-    return <h1>Error while fetching data!!</h1>;
-  }
+  useTodo('1');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f5f2e8] to-[#e7e3c2] dark:from-[#2a2818] dark:to-[#45422a] overflow-x-hidden flex items-center justify-center">
-      <div className="container bg-amber-50 dark:bg-amber-400 w-fit p-4">
+    <div className="min-h-screen bg-linear-to-br from-[#f8f5eb] via-[#f0ead8] to-[#b5ccbf]/20 dark:from-[#3a3625] dark:via-[#40584a]/40 dark:to-[#2a2818] overflow-x-hidden flex items-center justify-center">
+      <div className="container bg-amber-50 dark:bg-lime-500 w-fit p-4">
         <h2 className="text-3xl font-bold">Home Page</h2>
         <p>IsMobile: {isMobile ? 'true' : 'false'}</p>
         <p>Name: {storeName}</p>
@@ -64,4 +44,13 @@ const Homepage: React.FC = () => {
   );
 };
 
-export default Homepage;
+export const Loader = () => {
+  return (
+    <div className="flex h-screen items-center justify-center bg-gray-900 text-white">
+      <div className="animate-spin rounded-full h-10 w-10 border-4 border-t-transparent border-blue-500" />
+      <span className="ml-3 text-lg font-medium">Loading...</span>
+    </div>
+  );
+};
+
+export default HomePage;

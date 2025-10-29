@@ -1,4 +1,4 @@
-/* This is a bad code 
+/* This is a bad code
 
 import Homepage from './Home';
 import NotFoundPage from './NotFound';
@@ -6,9 +6,9 @@ import NotFoundPage from './NotFound';
 */
 
 /* This is a good code (wrap the application with Suspense component with fallback loader) */
-import React from 'react';
+import { _LazyWithSuspensePage, _LazyPage } from '../components/hoc/LazyLoaded';
 
-const Homepage = React.lazy(() => import('./Home'));
-const NotFoundPage = React.lazy(() => import('./NotFound'));
+const Homepage = _LazyWithSuspensePage(() => import('./Home'));
+const NotFoundPage = _LazyPage(() => import('./NotFound'));
 
 export { Homepage, NotFoundPage };
