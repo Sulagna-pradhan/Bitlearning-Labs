@@ -1,11 +1,10 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router';
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDark, setIsDark] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const location = useLocation();
@@ -68,14 +67,6 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]);
 
   const services = [
     { name: 'Wedding Catering', icon: '💒' },
@@ -198,15 +189,6 @@ export default function Header() {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-4">
-            {/* Theme Toggle */}
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full bg-[#b5ccbf]/20 dark:bg-[#b5ccbf]/20 text-[#67908c] dark:text-[#b5ccbf] hover:bg-[#b5ccbf]/40 dark:hover:bg-[#b5ccbf]/30 transition flex-shrink-0 cursor-pointer"
-              aria-label="Toggle theme"
-            >
-              {isDark ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-
             {/* Get Started Button */}
             <Link
               to="/contact"
