@@ -1,5 +1,5 @@
 import React, { createContext, useLayoutEffect } from 'react';
-import { useLocalStorage } from '../../hooks';
+import { useLocalStorage } from '../../lib/hooks';
 
 type Theme = 'light' | 'dark';
 
