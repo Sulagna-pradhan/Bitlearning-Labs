@@ -22,8 +22,7 @@
     <meta name="author" content="Mivaan Caterers & Event Management Services" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <link rel="alternate icon" type="image/png" href="/logo.png" />
+    <link rel="icon" type="image/png" href="/logo.pngg" />
 
     <!-- Open Graph (Facebook, LinkedIn) -->
     <meta property="og:type" content="website" />
@@ -69,9 +68,9 @@
         "@context": "https://schema.org",
         "@type": "webSite",
         "name": "Mivaan Caterers",
-        "url": "https://www.mivaancaterers.com/",
-        "logo": "https://www.mivaancaterers.com/logo.svg",
-        "image": "https://www.mivaancaterers.com/logo.png",
+        "url": "",
+        "logo": "",
+        "image": "",
         "description": "Premium catering and event management company offering wedding, party, and corporate event services across India.",
         "telephone": "+91-8617788181",
         "address": {
@@ -91,12 +90,6 @@
       }
     </script>
 
-    <!-- Google Verification -->
-    <meta
-      name="google-site-verification"
-      content="g-mEUaPABrWayWW_GhC91KVB0FzoFZrF5N_3QlVzrjQ"
-    />
-
     <!-- Performance & Accessibility -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="theme-color" content="#ffffff" />
@@ -113,7 +106,22 @@
     </noscript>
     <!-- Initial hydration for Theme -->
     <script>
-      (()=>{(function(){try{let e=localStorage.getItem("theme");e?(document.documentElement.classList.remove("dark","light"),document.documentElement.classList.add(JSON.parse(e))):(document.documentElement.classList.remove("dark","light"),document.documentElement.classList.add("light"))}catch(e){document.documentElement.classList.remove("dark","light"),document.documentElement.classList.add("light"),console.error("Theme pre-load error:",e)}})();})();
+      (() => {
+        (function () {
+          try {
+            let e = localStorage.getItem('theme');
+            e
+              ? (document.documentElement.classList.remove('dark', 'light'),
+                document.documentElement.classList.add(JSON.parse(e)))
+              : (document.documentElement.classList.remove('dark', 'light'),
+                document.documentElement.classList.add('light'));
+          } catch (e) {
+            (document.documentElement.classList.remove('dark', 'light'),
+              document.documentElement.classList.add('light'),
+              console.error('Theme pre-load error:', e));
+          }
+        })();
+      })();
     </script>
 
     <div id="root"></div>
