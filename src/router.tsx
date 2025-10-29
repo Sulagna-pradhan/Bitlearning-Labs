@@ -1,3 +1,4 @@
+import React from 'react';
 import { createBrowserRouter } from 'react-router';
 
 import { BaseLayout } from './layouts';
@@ -10,7 +11,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Homepage />,
+        element: (
+          <React.Suspense
+            fallback={
+              <div className="w-full h-screen bg-zinc-700 text-white flex items-center justify-center">
+                <h2>Loading....</h2>
+              </div>
+            }
+          >
+            <Homepage />
+          </React.Suspense>
+        ),
       },
     ],
   },

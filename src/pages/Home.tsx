@@ -1,10 +1,35 @@
 import React from 'react';
-import { useIsMobile, useLocalStorage, useTheme } from '../hooks';
+import { useIsMobile, useLocalStorage, useTheme } from '../lib/hooks';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 const Homepage: React.FC = () => {
   const [name, setName] = useLocalStorage('userName', '');
   const isMobile = useIsMobile();
   const { theme, toggleTheme } = useTheme();
+
+  const fetchTodoById = async (id: string) => {
+    try {
+      const res = await fetch(
+        'https://jsonplaceholder.typicode.com/todos/' + id,
+      );
+      const data = await res.json();
+      // simulate network delay by 2s
+      return new Promise((resolve) => setTimeout(() => resolve(data), 2000));
+    } catch (error) {
+      throw new Error(`API Error: ${error}`);
+    }
+  };
+
+  const { data, error, isFetching } = useSuspenseQuery({
+    queryKey: ['testing'],
+    queryFn: () => fetchTodoById('1'),
+  });
+
+  if (!isFetching && error) {
+    return <h1>Error while fetching data!!</h1>;
+  }
+
+  console.log(data);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f5f2e8] to-[#e7e3c2] dark:from-[#2a2818] dark:to-[#45422a] overflow-x-hidden flex items-center justify-center">
