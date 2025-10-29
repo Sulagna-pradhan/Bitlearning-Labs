@@ -7,7 +7,7 @@ import {
 } from '../lib/hooks';
 import { useTodo } from '../services/api/todo';
 
-const Homepage: React.FC = () => {
+const HomePage: React.FC = () => {
   const [storeName, setNameToStore] = useLocalStorage('userName', '');
   const [name, setName] = useState<string>(storeName);
   const debouncedName = useDebounce(name);
@@ -44,13 +44,13 @@ const Homepage: React.FC = () => {
   );
 };
 
-// export const Loader = () => {
-//   return (
-//     <div className="flex h-screen items-center justify-center bg-gray-900 text-white">
-//       <div className="animate-spin rounded-full h-10 w-10 border-4 border-t-transparent border-blue-500" />
-//       <span className="ml-3 text-lg font-medium">Loading...</span>
-//     </div>
-//   );
-// };
+export const HomeLoader = () => {
+  return (
+    <div className="flex h-screen items-center justify-center bg-gray-900 text-white">
+      <div className="animate-spin rounded-full h-10 w-10 border-4 border-t-transparent border-blue-500" />
+      <span className="ml-3 text-lg font-medium">Loading...</span>
+    </div>
+  );
+};
 
-export default Homepage;
+export default HomePage;
